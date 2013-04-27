@@ -71,9 +71,7 @@ function addClickListeners() {
             });
             $j('#formheader').html('Edit Case');
             setButtonText('#actionbtn', 'Update');
-            $j('#actionbtn')
-            .unbind('click.btn')
-            .bind('click.btn', updateHandler);
+            $j('#actionbtn').unbind('click.btn').bind('click.btn', updateHandler);
             $j.mobile.loading( "hide");
             $j.mobile.changePage( "#editpage" , { reverse: false, changeHash: false } );
         }, errorCallback);
@@ -101,8 +99,8 @@ function getRecords(callback) {
                 ,
                 function(response) {
                     $j('#Subject').html(response.Subject);
-					$j('#Status').html(response.Status);
-					$j('#Description').html(response.Description);
+					          $j('#Status').html(response.Status);
+					          $j('#Description').html(response.Description);
                     $j('#Id').val(response.Id);
                     $j.mobile.loading("hide");
                     $j.mobile.changePage( "#detailpage" , { reverse: false, changeHash: true } );
@@ -125,7 +123,7 @@ function createHandler(e) {
     e.preventDefault();
     var form = $j('#form');
     var fields = {};
-    form.find('input').each(function() {
+    form.find('input, textarea').each(function() {
         var child = $j(this);
         if (child.val().length > 0 && child.attr("name") != 'Id') {
             fields[child.attr("name")] = child.val();
@@ -146,7 +144,7 @@ function updateHandler(e) {
     e.preventDefault();
     var form = $j('#form');
     var fields = {};
-    form.find('input').each(function() {
+    form.find('input, textarea').each(function() {
         var child = $j(this);
         if (child.val().length > 0 && child.attr("name") != 'Id') {
             fields[child.attr("name")] = child.val();
