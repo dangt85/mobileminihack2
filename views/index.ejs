@@ -144,17 +144,16 @@ function sessionCallback(oauthResponse) {
 		   <h1>Case Detail</h1>
 	    </div>
 	    <div data-role="content">
-	        <table>
-	            <tr><td>Subject:</td><td id="Subject"></td></tr>
-	            <tr><td>Status:</td><td id="Status"></td></tr>
-				<tr><td>Description:</td><td id="Description"></td></tr>
-	        </table>
-	        <form name="detail" id="detail">
-	            <input type="hidden" name="Id" id="Id" />
-	            <button data-role="button" id="editbtn">Edit</button>
-	            <button data-role="button" id="deletebtn" data-icon="delete"
-				  data-theme="e">Delete</button>
-	        </form>
+        <table>
+          <tr><td>Subject:</td><td id="Subject"></td></tr>
+          <tr><td>Status:</td><td id="Status"></td></tr>
+		      <tr><td>Description:</td><td id="Description"></td></tr>
+        </table>
+        <form name="detail" id="detail">
+            <input type="hidden" name="Id" id="Id" />
+            <button data-role="button" id="editbtn">Edit</button>
+            <button data-role="button" id="deletebtn" data-icon="delete" data-theme="e">Delete</button>
+        </form>
 	    </div>
 	    <div data-role="footer">
 	        <h4>Force.com</h4>
@@ -169,15 +168,18 @@ function sessionCallback(oauthResponse) {
 	        <form name="Case" id="form">
 	            <input type="hidden" name="Id" id="Id" />
 	            <table>
-	                <tr><td>Subject:</td><td ><input name="Subject" id="Subject"
-					  data-theme="c"/></td></tr>
-		            <tr><td>Status:</td><td ><input name="Status" id="Status"
-						  data-theme="c"/></td></tr>
-					<tr>
-						<td>Description:</td>
-						<td><textarea name="Description" id="Description"
-						  data-theme="c"></textarea></td>
-					</tr>
+	                <tr>
+	                  <td>Subject:</td>
+	                  <td><input name="Subject" id="Subject" data-theme="c"/></td>
+                  </tr>
+		              <tr>
+		                <td>Status:</td>
+		                <td><input name="Status" id="Status" data-theme="c"/></td>
+	                </tr>
+					        <tr>
+						        <td>Description:</td>
+						        <td><textarea name="Description" id="Description" data-theme="c"></textarea></td>
+					        </tr>
 	            </table>
 	            <button data-role="button" id="actionbtn">Action</button>
 	        </form>

@@ -85,36 +85,30 @@ function getRecords(callback) {
     client.query("SELECT Id,Subject,Status,Description FROM Case ORDER BY Subject LIMIT 50"
     ,
     function(response) {
-		console.log('recieved'+response.records);
-        $j.each(response.records,
+		  console.log('recieved'+response.records);
+      $j.each(response.records,
         function() {
-            var id = this.Id;
-            $j('<li></li>')
-            .hide()
-            .append('<a><h2>' + this.Subject + '</h2></a>')
-            .click(function(e) {
-                e.preventDefault();
-                $j.mobile.loading( "show", { text: 'Loading', textVisible: true } );
-                client.retrieve("Case", id, "Id,Subject,Status,Description"
-                ,
+          var id = this.Id;
+          $j('<li></li>').hide().append('<a><h2>' + this.Subject + '</h2></a>').click(function(e) {
+              e.preventDefault();
+              $j.mobile.loading( "show", { text: 'Loading', textVisible: true } );
+              client.retrieve("Case", id, "Id,Subject,Status,Description",
                 function(response) {
-                    $j('#Subject').html(response.Subject);
-					          $j('#Status').html(response.Status);
-					          $j('#Description').html(response.Description);
+                    $j('td#Subject').html(response.Subject);
+			              $j('td#Status').html(response.Status);
+			              $j('td#Description').html(response.Description);
                     $j('#Id').val(response.Id);
                     $j.mobile.loading("hide");
                     $j.mobile.changePage( "#detailpage" , { reverse: false, changeHash: true } );
                 }, errorCallback);
-            })
-            .appendTo('#list')
-            .show();
-        });
+          }).appendTo('#list').show();
+      });
 
-        $j('#list').listview('refresh');
+      $j('#list').listview('refresh');
 
-        if (typeof callback != 'undefined' && callback != null) {
-            callback();
-        }
+      if (typeof callback != 'undefined' && callback != null) {
+          callback();
+      }
     }, errorCallback);
 }
 
