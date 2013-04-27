@@ -84,7 +84,7 @@ function addClickListeners() {
 function getRecords(callback) {
 	console.log('In getRecords');
     $j('#list').empty();
-    client.query("SELECT Id,Subject,Status,Description FROM Case ORDER BY Subject LIMIT 20"
+    client.query("SELECT Id,Subject,Status,Description FROM Case ORDER BY Subject LIMIT 50"
     ,
     function(response) {
 		console.log('recieved'+response.records);
