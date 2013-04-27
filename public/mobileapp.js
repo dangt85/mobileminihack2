@@ -39,7 +39,7 @@ function addClickListeners() {
         // Show the 'New Account' form
         e.preventDefault();
         $j('#form')[0].reset();
-        $j('#formheader').html('New Contact');
+        $j('#formheader').html('New Case');
         setButtonText('#actionbtn', 'Create');
         $j('#actionbtn').unbind('click.btn').bind('click.btn', createHandler);
         $j.mobile.changePage( "#editpage" , { reverse: false, changeHash: false } );
@@ -49,7 +49,7 @@ function addClickListeners() {
         // Delete the account
         e.preventDefault();
         $j.mobile.loading( "show", { text: 'Loading', textVisible: true } );
-        client.del('Contact', $j('#detail').find('#Id').val()
+        client.del('Case', $j('#detail').find('#Id').val()
         ,
         function(response) {
             getRecords(function() {
@@ -63,13 +63,13 @@ function addClickListeners() {
         // Get account fields and show the 'Edit Account' form
         e.preventDefault();
         $j.mobile.loading( "show", { text: 'Loading', textVisible: true } );
-        client.retrieve("Contact", $j('#detail').find('#Id').val()
-        , "Name,FirstName,LastName,Id,Email",
+        client.retrieve("Case", $j('#detail').find('#Id').val()
+        , "Id,Subject,Status,Description",
         function(response) {
             $j('#form').find('input').each(function() {
                 $j(this).val(response[$j(this).attr("name")]);
             });
-            $j('#formheader').html('Edit Contact');
+            $j('#formheader').html('Edit Case');
             setButtonText('#actionbtn', 'Update');
             $j('#actionbtn')
             .unbind('click.btn')
@@ -84,7 +84,7 @@ function addClickListeners() {
 function getRecords(callback) {
 	console.log('In getRecords');
     $j('#list').empty();
-    client.query("SELECT Id, Name, FirstName, LastName FROM Contact ORDER BY Name LIMIT 20"
+    client.query("SELECT Id,Subject,Status,Description FROM Case ORDER BY Subject LIMIT 20"
     ,
     function(response) {
 		console.log('recieved'+response.records);
@@ -93,17 +93,16 @@ function getRecords(callback) {
             var id = this.Id;
             $j('<li></li>')
             .hide()
-            .append('<a><h2>' + this.Name + '</h2></a>')
+            .append('<a><h2>' + this.Subject + '</h2></a>')
             .click(function(e) {
                 e.preventDefault();
                 $j.mobile.loading( "show", { text: 'Loading', textVisible: true } );
-                client.retrieve("Contact", id, "Name,FirstName,LastName,Id,Email"
+                client.retrieve("Case", id, "Id,Subject,Status,Description"
                 ,
                 function(response) {
-                    $j('#Name').html(response.Name);
-					$j('#FirstName').html(response.FirstName);
-					$j('#LastName').html(response.LastName);
-                    $j('#Email').html(response.Email);
+                    $j('#Subject').html(response.Subject);
+					$j('#Status').html(response.Status);
+					$j('#Description').html(response.Description);
                     $j('#Id').val(response.Id);
                     $j.mobile.loading("hide");
                     $j.mobile.changePage( "#detailpage" , { reverse: false, changeHash: true } );
@@ -133,7 +132,7 @@ function createHandler(e) {
         }
     });
     $j.mobile.loading( "show", { text: 'Loading', textVisible: true } );
-    client.create('Contact', fields,
+    client.create('Case', fields,
     function(response) {
         getRecords(function() {
             $j.mobile.loading( "hide" );
@@ -154,7 +153,7 @@ function updateHandler(e) {
         }
     });
     $j.mobile.loading( "show", { text: 'Loading', textVisible: true } );
-    client.update('Contact', form.find('#Id').val(), fields
+    client.update('Case', form.find('#Id').val(), fields
     ,
     function(response) {
         getRecords(function() {

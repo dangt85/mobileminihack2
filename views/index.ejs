@@ -30,16 +30,16 @@ an HTML5 mobile app using jQuery Mobile
 -->
 <html>
 <head>
-<title>Contacts</title>
+<title>Cases</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <!--
-    For development, you may want to load jQuery/jQuery Mobile from their CDN. 
+    For development, you may want to load jQuery/jQuery Mobile from their CDN.
 -->
 <link rel="stylesheet" href="jquery.mobile-1.3.0.min.css" />
 <script type="text/javascript" src="jquery.min.js"></script>
 <!--
-From jQuery-swip - http://code.google.com/p/jquery-swip/source/browse/trunk/jquery.popupWindow.js 
+From jQuery-swip - http://code.google.com/p/jquery-swip/source/browse/trunk/jquery.popupWindow.js
 -->
 <script type="text/javascript" src="jquery.popup.js"></script>
 <script type="text/javascript" src="jquerymobile.js"></script>
@@ -53,7 +53,7 @@ var clientId    = '<%- client_id %>'; //demo only
 var redirectUri = '<%- app_url %>/index.html';
 var proxyUrl = '<%- app_url %>/proxy/';
 
-// We'll get an instance of the REST API client in a callback after we do 
+// We'll get an instance of the REST API client in a callback after we do
 // OAuth
 var client = new forcetk.Client(clientId, loginUrl, proxyUrl);
 
@@ -92,21 +92,21 @@ function sessionCallback(oauthResponse) {
     if (typeof oauthResponse === 'undefined'
         || typeof oauthResponse['access_token'] === 'undefined') {
         errorCallback({
-            status: 0, 
-            statusText: 'Unauthorized', 
+            status: 0,
+            statusText: 'Unauthorized',
             responseText: 'No OAuth response'
         });
     } else {
         client.setSessionToken(oauthResponse.access_token, null, oauthResponse.instance_url);
 
 		addClickListeners();
-		
+
 		$j.mobile.changePage( "#mainpage" , { reverse: false, changeHash: true } );
 	    $j.mobile.loading( "show", { text: 'Loading', textVisible: true } );
 	    getRecords(function(){
 	        $j.mobile.loading( "hide" );
-			
-		}); 
+
+		});
     }
 }
   </script>
@@ -124,13 +124,13 @@ function sessionCallback(oauthResponse) {
 	</div>
 	<div data-role="page" data-theme="b" id="mainpage">
 	    <div data-role="header">
-		    <h1>Contacts</h1>
+		    <h1>Cases</h1>
 	    </div>
 	    <div data-role="content">
 	        <form>
 	            <button data-role="button" id="newbtn">New</button>
 	        </form>
-	        <ul id="list" data-inset="true" data-role="listview" 
+	        <ul id="list" data-inset="true" data-role="listview"
 			  data-theme="c" data-dividertheme="b">
 	        </ul>
 	    </div>
@@ -141,18 +141,18 @@ function sessionCallback(oauthResponse) {
 	<div data-role="page" data-theme="b" id="detailpage">
 	    <div data-role="header">
 	    <a href='#mainpage' id="back" class='ui-btn-left' data-icon='arrow-l'>Back</a>
-		   <h1>Contact Detail</h1>
+		   <h1>Case Detail</h1>
 	    </div>
 	    <div data-role="content">
 	        <table>
-	            <tr><td>First Name:</td><td id="FirstName"></td></tr>
-	            <tr><td>Last Name:</td><td id="LastName"></td></tr>
-				<tr><td>Email:</td><td id="Email"></td></tr>
+	            <tr><td>Subject:</td><td id="Subject"></td></tr>
+	            <tr><td>Status:</td><td id="Status"></td></tr>
+				<tr><td>Description:</td><td id="Description"></td></tr>
 	        </table>
 	        <form name="detail" id="detail">
 	            <input type="hidden" name="Id" id="Id" />
 	            <button data-role="button" id="editbtn">Edit</button>
-	            <button data-role="button" id="deletebtn" data-icon="delete" 
+	            <button data-role="button" id="deletebtn" data-icon="delete"
 				  data-theme="e">Delete</button>
 	        </form>
 	    </div>
@@ -163,20 +163,20 @@ function sessionCallback(oauthResponse) {
 	<div data-role="page" data-theme="b" id="editpage">
 	    <div data-role="header">
 	    <a href='#mainpage' id="back" class='ui-btn-left' data-icon='arrow-l'>Back</a>
-	    	<h1 id="formheader">New Contact</h1>
+	    	<h1 id="formheader">New Case</h1>
 	    </div>
 	    <div data-role="content">
-	        <form name="contact" id="form">
+	        <form name="Case" id="form">
 	            <input type="hidden" name="Id" id="Id" />
 	            <table>
-	                <tr><td>First Name:</td><td ><input name="FirstName" id="FirstName" 
+	                <tr><td>Subject:</td><td ><input name="Subject" id="Subject"
 					  data-theme="c"/></td></tr>
-		            <tr><td>Last Name:</td><td ><input name="LastName" id="LastName" 
+		            <tr><td>Status:</td><td ><input name="Status" id="Status"
 						  data-theme="c"/></td></tr>
 					<tr>
-						<td>Email:</td>
-						<td><input name="Email" id="Email" 
-						  data-theme="c"/></td>
+						<td>Description:</td>
+						<td><textarea name="Description" id="Description"
+						  data-theme="c"></textarea></td>
 					</tr>
 	            </table>
 	            <button data-role="button" id="actionbtn">Action</button>

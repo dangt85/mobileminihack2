@@ -1,6 +1,6 @@
 {
-  "name": "AngularSFBootstrap",
-  "description": "An example AngularJS + Twitter Bootstrap + Angular-Force standalone heroku app",
+  "name": "jQueryMobile",
+  "description": "An example jQueryMobile standalone heroku app",
   "version": "0.0.1",
   "private": true,
   "scripts": {
